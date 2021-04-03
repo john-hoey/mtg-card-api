@@ -1,0 +1,31 @@
+<form
+  class="form"
+  #autocompleteForm="ngForm"
+  (input)="setSearchTerm(autocompleteForm)"
+  (ngSubmit)="searchSubmit()"
+>
+  <!-- <label for="term">A place to store your todos</label> -->
+  <input
+    type="text"
+    id="term"
+    name="term"
+    placeholder="Enter a Card Name"
+    list="dynmicUserIds"
+    ngModel
+  />
+  <datalist id="dynmicUserIds">
+    <option *ngFor="let item of autocompleteResults?.data" [value]="item">
+      {{ item }}
+    </option>
+  </datalist>
+  <button>Submit</button>
+</form>
+
+<ul>
+  <li *ngFor="let result of searchResults?.data">
+    <p>{{ result.name }}</p>
+    <a href="{{ related_uris?.gatherer }}"
+      ><img src="{{ result.image_uris?.small }}"
+    /></a>
+  </li>
+</ul>
